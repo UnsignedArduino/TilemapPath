@@ -145,7 +145,9 @@ namespace TilemapPath {
         if (path.get_path().length > 0) {
             scene.followPath(sprite, scene.aStar(locationOfSprite(sprite), path.get_path()[0]), speed);
         }
-        for (let inner_path of path.a_star_path) {
+        for (let index = 0; index < path.a_star_path.length; index += 1) {
+            let inner_path: tiles.Location[] = path.a_star_path[index];
+            sprite.data["_tilemap_path_curr_segment"] = index;
             scene.followPath(sprite, inner_path, speed);
             wait_till_finish_path(sprite);
             let sprite_index = _sprites_to_stop.indexOf(sprite);
