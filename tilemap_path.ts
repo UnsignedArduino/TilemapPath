@@ -147,13 +147,25 @@ namespace TilemapPath {
     }
 
     /**
+     * Get if a sprite is following a tilemap_path
+     * @param sprite: The sprite to check.
+     */
+    //% block="is $sprite following path"
+    //% sprite.shadow="variables_get"
+    //% sprite.defl="mySprite"
+    //% weight=80
+    export function is_sprite_following_path(sprite: Sprite) {
+        return _sprites_are_following.indexOf(sprite) != -1;
+    }
+
+    /**
      * Have a sprite stop following a TilemapPath
      * @param sprite: The sprite that will stop following the path.
      */
     //% block="sprite $sprite stop following path"
     //% sprite.shadow="variables_get"
     //% sprite.defl="mySprite"
-    //% weight=80
+    //% weight=70
     export function stop_follow_path(sprite: Sprite) {
         if (_sprites_are_following.indexOf(sprite) != -1) {
             _sprites_to_stop.push(sprite);
@@ -166,8 +178,8 @@ namespace TilemapPath {
      */
     //% block="on sprite $sprite finishes tilemap path"
     //% draggableParameters="reporter"
-    //% weight=70
-    export function onEventWithHandlerArgs(handler: (sprite: Sprite) => void) {
+    //% weight=60
+    export function on_sprite_finishes_path(handler: (sprite: Sprite) => void) {
         _finish_callback = handler;
     }
 }
