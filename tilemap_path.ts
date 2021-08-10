@@ -208,7 +208,7 @@ namespace TilemapPath {
     //% block="on sprite $sprite finishes tilemap path"
     //% draggableParameters="reporter"
     //% weight=60
-    export function onEventWithHandlerArgs(handler: (sprite: Sprite) => void) {
+    export function on_sprite_finishes_path(handler: (sprite: Sprite) => void) {
         _finish_callback = handler;
     }
 }
