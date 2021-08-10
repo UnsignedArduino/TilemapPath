@@ -154,7 +154,7 @@ namespace TilemapPath {
     //% sprite.shadow="variables_get"
     //% sprite.defl="mySprite"
     //% weight=80
-    export function is_sprite_following_path(sprite: Sprite) {
+    export function is_sprite_following_path(sprite: Sprite): boolean {
         return _sprites_are_following.indexOf(sprite) != -1;
     }
 
