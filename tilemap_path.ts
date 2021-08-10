@@ -100,6 +100,33 @@ namespace TilemapPath {
     }
 
     /**
+     * Set the path of the TilemapPath object
+     * @param tmpath: The TilemapPath to use.
+     * @param path: A list of locations to go to in order.
+     */
+    //% block="$tmpath set path to $path"
+    //% tmpath.shadow="variables_get"
+    //% tmpath.defl="path"
+    //% path.shadow="lists_create_with"
+    //% weight=98
+    export function set_path(tmpath: TilemapPath.TilemapPath, path: tiles.Location[]) {
+        tmpath.set_path(path);
+    }
+
+    /**
+     * Get the path of the TilemapPath object
+     * @param tmpath: The TilemapPath to use.
+     * @return: A list of locations to go to in order.
+     */
+    //% block="$tmpath get path"
+    //% tmpath.shadow="variables_get"
+    //% tmpath.defl="path"
+    //% weight=99
+    export function get_path(tmpath: TilemapPath.TilemapPath): tiles.Location[] {
+        return tmpath.get_path();
+    }
+
+    /**
      * Have a sprite follow a TilemapPath
      * @param sprite: The sprite that will follow the path.
      * @param path: The TilemapPath that will be followed.
