@@ -4,6 +4,7 @@ namespace TilemapPath {
      * Define variables that are part of the namespace
      */
     let _sprites_to_stop: Sprite[] = [];
+    let _sprites_are_following: Sprite[] = [];
     let _finish_callback: (sprite: Sprite) => void;
 
     /**
@@ -113,6 +114,7 @@ namespace TilemapPath {
     //% expandableArgumentMode="enabled"
     //% weight=90
     export function follow_path(sprite: Sprite, path: TilemapPath, speed: number = 100) {
+        _sprites_are_following.push(sprite);
         if (path.get_path().length > 0) {
             scene.followPath(sprite, scene.aStar(locationOfSprite(sprite), path.get_path()[0]), speed);
         }
@@ -122,12 +124,14 @@ namespace TilemapPath {
             let sprite_index = _sprites_to_stop.indexOf(sprite);
             if (sprite_index != -1) {
                 _sprites_to_stop.splice(sprite_index, 1);
+                _sprites_are_following.splice(_sprites_are_following.indexOf(sprite), 1);
                 return;
             }
         }
         if (_finish_callback) {
             _finish_callback(sprite);
         }
+        _sprites_are_following.splice(_sprites_are_following.indexOf(sprite), 1);
     }
 
     /**
@@ -151,8 +155,10 @@ namespace TilemapPath {
     //% sprite.defl="mySprite"
     //% weight=80
     export function stop_follow_path(sprite: Sprite) {
-        _sprites_to_stop.push(sprite);
-        scene.followPath(sprite, null);
+        if (_sprites_are_following.indexOf(sprite) != -1) {
+            _sprites_to_stop.push(sprite);
+            scene.followPath(sprite, null);
+        }
     }
 
     /**
